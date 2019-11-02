@@ -10,8 +10,8 @@ namespace Lokad.FastMath.Tests.Bench
     {
         public static void Main(string[] args)
         {
-            //var summary = BenchmarkRunner.Run<ExpBench>();
-            var summary = BenchmarkRunner.Run<LogBench>();
+            var summary = BenchmarkRunner.Run<ExpBench>();
+            //var summary = BenchmarkRunner.Run<LogBench>();
             //var summary = BenchmarkRunner.Run<Log2Bench>();
         }
     }
@@ -21,7 +21,7 @@ namespace Lokad.FastMath.Tests.Bench
     {
         public float X = 0.1f;
 
-        public Vector256<float> XV = Vector256.Create(0.1f);
+        public Vector256<float> X8 = Vector256.Create(0.1f);
 
         [Benchmark]
         public float Exp_System_MathF() => MathF.Exp(X);
@@ -30,7 +30,10 @@ namespace Lokad.FastMath.Tests.Bench
         public float Exp_System_Math() => (float)Math.Exp(X);
 
         [Benchmark]
-        public Vector256<float> Exp_FastMath() => FastMath.Exp(XV);
+        public float Exp_FastMath() => FastMath.Exp(X);
+
+        [Benchmark]
+        public Vector256<float> Exp_FastMath_F8() => FastMath.Exp(X8);
     }
 
     [RPlotExporter]
@@ -38,7 +41,7 @@ namespace Lokad.FastMath.Tests.Bench
     {
         public float X = 0.1f;
 
-        public Vector256<float> XV = Vector256.Create(0.1f);
+        public Vector256<float> X8 = Vector256.Create(0.1f);
 
         [Benchmark]
         public float Log_System_MathF() => MathF.Log(X);
@@ -47,7 +50,7 @@ namespace Lokad.FastMath.Tests.Bench
         public float Log_System_Math() => (float)Math.Log(X);
 
         [Benchmark]
-        public Vector256<float> Log_FastMath() => FastMath.Log(XV);
+        public Vector256<float> Log_FastMath_F8() => FastMath.Log(X8);
     }
 
     [RPlotExporter]
@@ -65,6 +68,6 @@ namespace Lokad.FastMath.Tests.Bench
         public uint Log2_FastMath_Uint() => FastMath.Log2(123);
 
         [Benchmark]
-        public uint Log2_FastMath_WithLookup() => AltMath.Log2(123);
+        public uint Log2_AltMath_WithLookup() => AltMath.Log2(123);
     }
 }

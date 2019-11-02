@@ -35,7 +35,39 @@ namespace Lokad.FastMath
         //}
 
         /// <summary>
-        /// Max. rel. error <= 1.72886892e-3 on [-87.33654, 88.72283].
+        /// Max. relative error <= 1.72886892e-3 on [-87.33654, 88.72283].
+        /// </summary>
+        public static float Exp(float x)
+        {
+            float f, p;
+            int t, j;
+            FloatIntUnion r;
+
+            const float a = 12102203.0f; /* (1 << 23) / log(2) */
+            const int m = unchecked((int)0xff800000); /* mask for integer bits */
+            const float ttm23 = 1.1920929e-7f; /* exp2(-23) */
+            const float c0 = 0.3371894346f;
+            const float c1 = 0.657636276f;
+            const float c2 = 1.00172476f;
+
+            t = (int)(a * x);
+            j = t & m;      /* j = (int)(floor (x/log(2))) << 23 */
+            t = t - j;
+            f = ttm23 * t; /* f = (x/log(2)) - floor (x/log(2)) */
+            p = c0;        /* c0 */
+            p = p * f;     /* c0 * f */
+            p = p + c1;    /* c0 * f + c1 */
+            p = p * f;     /* (c0 * f + c1) * f */
+            p = p + c2;    /* p = (c0 * f + c1) * f + c2 ~= 2^f */
+
+            r.Int = 0; // HACK: work-around compiler error
+            r.Float = p;
+            r.Int = j + r.Int; /* r = p * 2^i*/
+            return r.Float;
+        }
+
+        /// <summary>
+        /// Max. relative error <= 1.72886892e-3 on [-87.33654, 88.72283].
         /// </summary>
         /// <remarks>
         /// |           Method |      Mean |     Error |    StdDev |

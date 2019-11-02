@@ -7,7 +7,17 @@ namespace Lokad.FastMath.Tests
     public class ExpTests
     {
         [Fact]
-        public void Exp256()
+        public void Exp_float()
+        {
+            for (float i = -85; i < 85; i += 0.1f)
+            {
+                var r = FastMath.Exp(i);
+                Assert.True(MathF.Exp(i).RelError(r) <= 1.72886892e-3f);
+            }
+        }
+
+        [Fact]
+        public void Exp_Vector256()
         {
             for(float i = -85; i < 85; i += 0.1f)
             {
