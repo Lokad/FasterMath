@@ -46,7 +46,7 @@ namespace Lokad.FastMath
         /// |  Log_System_Math | 11.931 ns | 0.2665 ns | 0.3370 ns |
         /// |     Log_FastMath |  6.591 ns | 0.1568 ns | 0.3022 ns |
         /// </remarks>
-        public unsafe static Vector256<float> Log(Vector256<float> val)
+        public static Vector256<float> Log(Vector256<float> val)
         {
             Vector256<float> exp, addcst, x;
 

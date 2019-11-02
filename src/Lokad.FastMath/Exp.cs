@@ -44,7 +44,7 @@ namespace Lokad.FastMath
         /// |  Exp_System_Math | 14.355 ns | 0.2615 ns | 0.2183 ns |
         /// |     Exp_FastMath |  4.104 ns | 0.1024 ns | 0.0957 ns |
         /// </remarks>
-        public unsafe static Vector256<float> Exp(Vector256<float> x)
+        public static Vector256<float> Exp(Vector256<float> x)
         {
             Vector256<float> f, p, r;
             Vector256<int> t, j;
