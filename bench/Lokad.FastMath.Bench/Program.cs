@@ -78,12 +78,18 @@ namespace Lokad.FastMath.Tests.Bench
     [RPlotExporter]
     public class DigammaBench
     {
-        public float X = 4;
+        public float X = 4f;
+
+        public Vector256<float> X8 = Vector256.Create(4f);
 
         [Benchmark]
         public float Digamma_FastMath() => FastMath.Digamma(X);
 
         [Benchmark]
+        public Vector256<float> Digamma_FastMath_F8() => FastMath.Digamma(X8);
+
+        [Benchmark]
         public double Digamma_AltMath() => AltMath.Digamma(X);
+
     }
 }
