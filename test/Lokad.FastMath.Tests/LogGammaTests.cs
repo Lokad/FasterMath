@@ -1,5 +1,5 @@
 ﻿using Lokad.FastMath.Alt;
-using System;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 namespace Lokad.FastMath.Tests
@@ -33,6 +33,21 @@ namespace Lokad.FastMath.Tests
                 var expected = (float)AltMath.LogGamma(i);
                 var r = FastMath.LogGamma((float)i);
                 Assert.True(expected.RelError(r) < 1e-3f);
+            }
+        }
+
+        [Fact]
+        public void LogGamma_Vector256()
+        {
+            for (var i = 0.001; i < 10000d; i *= 1.2)
+            {
+                var r = FastMath.LogGamma(Vector256.Create((float)i));
+                var expected = FastMath.LogGamma((float)i);
+
+                for (var k = 0; k < 8; k++)
+                {
+                    Assert.Equal(expected, r.GetElement(k));
+                }
             }
         }
     }

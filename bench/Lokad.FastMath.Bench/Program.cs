@@ -86,8 +86,8 @@ namespace Lokad.FastMath.Tests.Bench
         [Benchmark]
         public float LogGamma_FastMath() => FastMath.LogGamma(X);
 
-        //[Benchmark]
-        //public Vector256<float> LogGamma_FastMath_F8() => FastMath.LogGamma(X8);
+        [Benchmark]
+        public Vector256<float> LogGamma_FastMath_F8() => FastMath.LogGamma(X8);
 
         [Benchmark]
         public double LogGamma_AltMath() => AltMath.LogGamma(X);
