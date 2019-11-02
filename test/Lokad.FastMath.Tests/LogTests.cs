@@ -7,7 +7,17 @@ namespace Lokad.FastMath.Tests
     public class LogTests
     {
         [Fact]
-        public void Log256()
+        public void Log_float()
+        {
+            for (float i = -1; i < 85; i += 0.1f)
+            {
+                var r = FastMath.Log(i);
+                Assert.True(MathF.Log(i).AbsError(r) <= 1e-4f);
+            }
+        }
+
+        [Fact]
+        public void Log_Vector256()
         {
             for (float i = -1; i < 85; i += 0.1f)
             {

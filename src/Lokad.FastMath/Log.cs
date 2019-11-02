@@ -36,6 +36,28 @@ namespace Lokad.FastMath
         //    + (addcst + 0.6931471805f*exp);
         //}
 
+        public static float Log(float val)
+        {
+            float exp, addcst, x;
+            FloatIntUnion valu;
+
+            valu.Int = 0; // HACK: work-around compiler error
+            valu.Float = val;
+            exp = valu.Int >> 23;
+
+            addcst = val > 0 ? -89.970756366f : float.NaN;
+
+            valu.Int = (valu.Int & 0x7FFFFF) | 0x3F800000;
+            x = valu.Float;
+
+            return x * (3.529304993f +
+                    x * (-2.461222105f +
+                      x * (1.130626167f +
+                        x * (-0.288739945f +
+                          x * 3.110401639e-2f))))
+                + (addcst + 0.6931471805f * exp);
+        }
+
         /// <summary>
         /// Absolute error bounded by 1e-4.
         /// </summary>

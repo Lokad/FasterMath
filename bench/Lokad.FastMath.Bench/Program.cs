@@ -10,8 +10,8 @@ namespace Lokad.FastMath.Tests.Bench
     {
         public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<ExpBench>();
-            //var summary = BenchmarkRunner.Run<LogBench>();
+            //var summary = BenchmarkRunner.Run<ExpBench>();
+            var summary = BenchmarkRunner.Run<LogBench>();
             //var summary = BenchmarkRunner.Run<Log2Bench>();
         }
     }
@@ -48,6 +48,9 @@ namespace Lokad.FastMath.Tests.Bench
 
         [Benchmark]
         public float Log_System_Math() => (float)Math.Log(X);
+
+        [Benchmark]
+        public float Log_FastMath() => FastMath.Log(X);
 
         [Benchmark]
         public Vector256<float> Log_FastMath_F8() => FastMath.Log(X8);
