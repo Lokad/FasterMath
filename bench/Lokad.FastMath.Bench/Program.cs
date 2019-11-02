@@ -11,8 +11,8 @@ namespace Lokad.FastMath.Tests.Bench
         public static void Main(string[] args)
         {
             //var summary = BenchmarkRunner.Run<ExpBench>();
-            //var summary = BenchmarkRunner.Run<LogBench>();
-            var summary = BenchmarkRunner.Run<Log2Bench>();
+            var summary = BenchmarkRunner.Run<LogBench>();
+            //var summary = BenchmarkRunner.Run<Log2Bench>();
         }
     }
 
