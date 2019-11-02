@@ -36,41 +36,40 @@ namespace Lokad.FastMath
         /// <summary>
         /// Max. rel. error <= 1.72886892e-3 on [-87.33654, 88.72283].
         /// </summary>
+        /// <remarks>
+        /// |           Method |      Mean |     Error |    StdDev |
+        /// |----------------- |----------:|----------:|----------:|
+        /// | Exp_System_MathF |  3.369 ns | 0.1301 ns | 0.1866 ns |
+        /// |  Exp_System_Math | 14.355 ns | 0.2615 ns | 0.2183 ns |
+        /// |     Exp_FastMath |  4.104 ns | 0.1024 ns | 0.0957 ns |
+        /// </remarks>
         public unsafe static Vector256<float> Exp(Vector256<float> x)
         {
             Vector256<float> f, p, r;
             Vector256<int> t, j;
 
-            fixed(float* bf = stackalloc float[5])
-            fixed(int* bi = stackalloc int[1])
-            {
-                bf[0] = 12102203.0f;
-                bi[0] = unchecked((int)0xff800000);
-                bf[1] = 1.1920929e-7f;
-                bf[2] = 0.3371894346f;
-                bf[3] = 0.657636276f;
-                bf[4] = 1.00172476f;
+            // According to BenchmarkDotNet, isolating all the constants up-front
+            // yield nearly 10% speed-up.
 
-                var a = Avx.BroadcastScalarToVector256(&bf[0]); /* (1 << 23) / log(2) */
-                var m = Avx2.BroadcastScalarToVector256(&bi[0]); /* mask for integer bits */
-                var ttm23 = Avx.BroadcastScalarToVector256(&bf[1]); /* exp2(-23) */
-                var c0 = Avx.BroadcastScalarToVector256(&bf[2]);
-                var c1 = Avx.BroadcastScalarToVector256(&bf[3]);
-                var c2 = Avx.BroadcastScalarToVector256(&bf[4]);
+            const float a = 12102203.0f; /* (1 << 23) / log(2) */
+            const int m = unchecked((int)0xff800000); /* mask for integer bits */
+            const float ttm23 = 1.1920929e-7f; /* exp2(-23) */
+            const float c0 = 0.3371894346f;
+            const float c1 = 0.657636276f;
+            const float c2 = 1.00172476f;
 
-                t = Avx2.ConvertToVector256Int32(Avx2.Multiply(a, x));
-                j = Avx2.And(t, m); /* j = (int)(floor (x/log(2))) << 23 */
-                t = Avx2.Subtract(t, j);
-                f = Avx2.Multiply(ttm23, Avx2.ConvertToVector256Single(t)); /* f = (x/log(2)) - floor (x/log(2)) */
-                p = c0;                  /* c0 */
-                p = Avx2.Multiply(p, f); /* c0 * f */
-                p = Avx2.Add(p, c1);     /* c0 * f + c1 */
-                p = Avx2.Multiply(p, f); /* (c0 * f + c1) * f */
-                p = Avx2.Add(p, c2);     /* p = (c0 * f + c1) * f + c2 ~= 2^f */
+            t = Avx2.ConvertToVector256Int32(Avx2.Multiply(Vector256.Create(a), x));
+            j = Avx2.And(t, Vector256.Create(m));      /* j = (int)(floor (x/log(2))) << 23 */
+            t = Avx2.Subtract(t, j);
+            f = Avx2.Multiply(Vector256.Create(ttm23), Avx2.ConvertToVector256Single(t)); /* f = (x/log(2)) - floor (x/log(2)) */
+            p = Vector256.Create(c0);                  /* c0 */
+            p = Avx2.Multiply(p, f);                   /* c0 * f */
+            p = Avx2.Add(p, Vector256.Create(c1));     /* c0 * f + c1 */
+            p = Avx2.Multiply(p, f);                   /* (c0 * f + c1) * f */
+            p = Avx2.Add(p, Vector256.Create(c2));     /* p = (c0 * f + c1) * f + c2 ~= 2^f */
 
-                r = Avx2.Add(j, p.As<float, int>()).As<int, float>(); /* r = p * 2^i*/
-                return r;
-            }
+            r = Avx2.Add(j, p.As<float, int>()).As<int, float>(); /* r = p * 2^i*/
+            return r;
         }
     }
 }

@@ -39,8 +39,11 @@ namespace Lokad.FastMath
         /// Absolute error bounded by 1e-4.
         /// </summary>
         /// <remarks>
-        /// 2x slower than MathF.Log(), 0.7x faster than Math.Log(). 
-        /// Aka 4x faster per-value then MathF.Log, and 12x faster than Math.Log.
+        /// |           Method |      Mean |     Error |    StdDev |
+        /// |----------------- |----------:|----------:|----------:|
+        /// | Log_System_MathF |  3.809 ns | 0.1051 ns | 0.1869 ns |
+        /// |  Log_System_Math | 11.931 ns | 0.2665 ns | 0.3370 ns |
+        /// |     Log_FastMath |  6.591 ns | 0.1568 ns | 0.3022 ns |
         /// </remarks>
         public unsafe static Vector256<float> Log(Vector256<float> val)
         {

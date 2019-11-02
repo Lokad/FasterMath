@@ -21,7 +21,7 @@ namespace Lokad.FastMath.Tests.Bench
     {
         public float X = 0.1f;
 
-        public Vector256<float> XV = Vector256.Create(0.1f); 
+        public Vector256<float> XV = Vector256.Create(0.1f);
 
         [Benchmark]
         public float Exp_System_MathF() => MathF.Exp(X);
