@@ -1,11 +1,12 @@
-﻿using Xunit;
+﻿using Lokad.FastMath.Alt;
+using Xunit;
 
 namespace Lokad.FastMath.Tests
 {
     public class DigammaTests
     {
         [Fact]
-        public void Digamma_float()
+        public void Digamma_float_limited()
         {
             // Source: https://www.wolframalpha.com/ (2019-02-11)
             var results = new[] { 
@@ -19,6 +20,17 @@ namespace Lokad.FastMath.Tests
             foreach(var (val, expected) in results)
             {
                 var r = FastMath.Digamma(val);
+                Assert.True(expected.RelError(r) < 1e-3f);
+            }
+        }
+
+        [Fact]
+        public void Digamma_float()
+        {
+            for(var i = 0.001; i < 10000d; i *= 1.2)
+            {
+                var expected = (float)AltMath.Digamma(i);
+                var r = FastMath.Digamma((float)i);
                 Assert.True(expected.RelError(r) < 1e-3f);
             }
         }
