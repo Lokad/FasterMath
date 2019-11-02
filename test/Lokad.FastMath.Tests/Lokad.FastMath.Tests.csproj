@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Lokad.FastMath.Alt\Lokad.FastMath.Alt.csproj" />
     <ProjectReference Include="..\..\src\Lokad.FastMath\Lokad.FastMath.csproj" />
   </ItemGroup>
 

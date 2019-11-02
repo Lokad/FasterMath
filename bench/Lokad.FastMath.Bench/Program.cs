@@ -2,6 +2,7 @@
 using System.Runtime.Intrinsics;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Lokad.FastMath.Alt;
 
 namespace Lokad.FastMath.Tests.Bench
 {
@@ -10,7 +11,8 @@ namespace Lokad.FastMath.Tests.Bench
         public static void Main(string[] args)
         {
             //var summary = BenchmarkRunner.Run<ExpBench>();
-            var summary = BenchmarkRunner.Run<LogBench>();
+            //var summary = BenchmarkRunner.Run<LogBench>();
+            var summary = BenchmarkRunner.Run<Log2Bench>();
         }
     }
 
@@ -22,13 +24,13 @@ namespace Lokad.FastMath.Tests.Bench
         public Vector256<float> XV = Vector256.Create(0.1f); 
 
         [Benchmark]
-        public float MathExpF() => MathF.Exp(X);
+        public float Exp_System_MathF() => MathF.Exp(X);
 
         [Benchmark]
-        public float MathExpD() => (float)Math.Exp(X);
+        public float Exp_System_Math() => (float)Math.Exp(X);
 
         [Benchmark]
-        public Vector256<float> FastMathExpF() => FastMath.Exp(XV);
+        public Vector256<float> Exp_FastMath() => FastMath.Exp(XV);
     }
 
     [RPlotExporter]
@@ -39,12 +41,30 @@ namespace Lokad.FastMath.Tests.Bench
         public Vector256<float> XV = Vector256.Create(0.1f);
 
         [Benchmark]
-        public float MathLogF() => MathF.Log(X);
+        public float Log_System_MathF() => MathF.Log(X);
 
         [Benchmark]
-        public float MathExpD() => (float)Math.Log(X);
+        public float Log_System_Math() => (float)Math.Log(X);
 
         [Benchmark]
-        public Vector256<float> FastMathExpF() => FastMath.Log(XV);
+        public Vector256<float> Log_FastMath() => FastMath.Log(XV);
+    }
+
+    [RPlotExporter]
+    public class Log2Bench
+    {
+        public float X = 123;
+
+        [Benchmark]
+        public uint Log2_System_MathF() => (uint)MathF.Log(X, 2.0f);
+
+        [Benchmark]
+        public uint Log2_System_Math() => (uint)Math.Log(X, 2.0);
+
+        [Benchmark]
+        public uint Log2_FastMath_Uint() => FastMath.Log2(123);
+
+        [Benchmark]
+        public uint Log2_FastMath_WithLookup() => AltMath.Log2(123);
     }
 }

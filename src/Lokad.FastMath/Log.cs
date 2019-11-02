@@ -3,6 +3,9 @@ using System.Runtime.Intrinsics.X86;
 
 namespace Lokad.FastMath
 {
+    // TODO: [vermorel] missing the normalization in the range [1, 2]
+    // TODO: [vermorel] only 2x as fast as 'MathF.Log'
+
     public partial class FastMath
     {
         // https://github.com/jhjourdan/SIMD-math-prims/blob/master/simd_math_prims.h
@@ -16,7 +19,7 @@ namespace Lokad.FastMath
         //    float exp, addcst, x;
         //    valu.f = val;
         //    exp = valu.i >> 23;
-        //    /* -89.970756366f = -127 * log(2) + constant term of polynomial bellow. */
+        //    /* -89.970756366f = -127 * log(2) + constant term of polynomial below. */
         //    addcst = val > 0 ? -89.970756366f : -(float)INFINITY;
         //    valu.i = (valu.i & 0x7FFFFF) | 0x3F800000;
         //    x = valu.f;
@@ -43,7 +46,7 @@ namespace Lokad.FastMath
             Vector256<float> exp, addcst, x;
 
             exp = Avx2.ConvertToVector256Single(Avx2.ShiftRightArithmetic(val.As<float, int>(), 23));
-
+            
             fixed (float* bf = stackalloc float[8])
             fixed (int* bi = stackalloc int[2])
             {
