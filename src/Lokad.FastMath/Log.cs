@@ -5,6 +5,7 @@ namespace Lokad.FastMath
 {
     public partial class FastMath
     {
+        // Source:
         // https://github.com/jhjourdan/SIMD-math-prims/blob/master/simd_math_prims.h
 
         ///* Absolute error bounded by 1e-6 for normalized inputs

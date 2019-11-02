@@ -6,6 +6,7 @@ namespace Lokad.FastMath
 {
     public partial class FastMath
     {
+        // Source:
         // https://stackoverflow.com/questions/47025373/fastest-implementation-of-exponential-function-using-sse
 
         ///* max. rel. error <= 1.72886892e-3 on [-87.33654, 88.72283] */
