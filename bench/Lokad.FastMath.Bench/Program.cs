@@ -13,7 +13,8 @@ namespace Lokad.FastMath.Tests.Bench
             //var summary = BenchmarkRunner.Run<ExpBench>();
             //var summary = BenchmarkRunner.Run<LogBench>();
             //var summary = BenchmarkRunner.Run<Log2Bench>();
-            var summary = BenchmarkRunner.Run<DigammaBench>();
+            var summary = BenchmarkRunner.Run<LogGammaBench>();
+            //var summary = BenchmarkRunner.Run<DigammaBench>();
         }
     }
 
@@ -76,6 +77,23 @@ namespace Lokad.FastMath.Tests.Bench
     }
 
     [RPlotExporter]
+    public class LogGammaBench
+    {
+        public float X = 0.1f;
+
+        public Vector256<float> X8 = Vector256.Create(0.1f);
+
+        [Benchmark]
+        public float LogGamma_FastMath() => FastMath.LogGamma(X);
+
+        //[Benchmark]
+        //public Vector256<float> LogGamma_FastMath_F8() => FastMath.LogGamma(X8);
+
+        [Benchmark]
+        public double LogGamma_AltMath() => AltMath.LogGamma(X);
+    }
+
+    [RPlotExporter]
     public class DigammaBench
     {
         public float X = 4f;
@@ -90,6 +108,5 @@ namespace Lokad.FastMath.Tests.Bench
 
         [Benchmark]
         public double Digamma_AltMath() => AltMath.Digamma(X);
-
     }
 }
