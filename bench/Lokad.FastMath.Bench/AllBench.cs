@@ -1,27 +1,12 @@
-﻿using System;
-using System.Runtime.Intrinsics;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Attributes;
 using Lokad.FastMath.Alt;
+using System;
+using System.Runtime.Intrinsics;
 
 namespace Lokad.FastMath.Bench
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            //var summary = BenchmarkRunner.Run<DigammaBench>();
-            //var summary = BenchmarkRunner.Run<ExpBench>();
-            //var summary = BenchmarkRunner.Run<LogBench>();
-            //var summary = BenchmarkRunner.Run<Log2Bench>();
-            //var summary = BenchmarkRunner.Run<LogGammaBench>();
-
-            var summary = BenchmarkRunner.Run<AllBench>();
-        }
-    }
-
     [RPlotExporter]
-    public class DigammaBench
+    public class AllBench
     {
         public float DiGX = 4f;
 
@@ -35,11 +20,8 @@ namespace Lokad.FastMath.Bench
 
         [Benchmark]
         public double Digamma_AltMath() => AltMath.Digamma(DiGX);
-    }
 
-    [RPlotExporter]
-    public class ExpBench
-    {
+
         public float ExpX = 0.1f;
 
         public Vector256<float> X8 = Vector256.Create(0.1f);
@@ -55,11 +37,8 @@ namespace Lokad.FastMath.Bench
 
         [Benchmark]
         public Vector256<float> Exp_FastMath_F8() => FastMath.Exp(X8);
-    }
 
-    [RPlotExporter]
-    public class LogBench
-    {
+
         public float LogX = 0.1f;
 
         public Vector256<float> LogX8 = Vector256.Create(0.1f);
@@ -75,11 +54,8 @@ namespace Lokad.FastMath.Bench
 
         [Benchmark]
         public Vector256<float> Log_FastMath_F8() => FastMath.Log(LogX8);
-    }
 
-    [RPlotExporter]
-    public class Log2Bench
-    {
+
         public float Log2X = 123;
 
         [Benchmark]
@@ -93,11 +69,8 @@ namespace Lokad.FastMath.Bench
 
         [Benchmark]
         public uint Log2_AltMath_WithLookup() => AltMath.Log2(123);
-    }
 
-    [RPlotExporter]
-    public class LogGammaBench
-    {
+
         public float LogGX = 0.1f;
 
         public Vector256<float> LogGX8 = Vector256.Create(0.1f);
