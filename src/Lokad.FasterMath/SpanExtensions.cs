@@ -4,7 +4,7 @@ using System.Runtime.Intrinsics;
 
 namespace Lokad.Numerics
 {
-	public partial class FastMath
+	public partial class FxMath
     {
 		public static void Digamma(ReadOnlySpan<float> values, Span<float> results)
         {

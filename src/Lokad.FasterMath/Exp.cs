@@ -4,7 +4,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace Lokad.Numerics
 {
-    public partial class FastMath
+    public partial class FxMath
     {
         // Source:
         // https://stackoverflow.com/questions/47025373/fastest-implementation-of-exponential-function-using-sse
@@ -74,7 +74,7 @@ namespace Lokad.Numerics
         /// |----------------- |----------:|----------:|----------:|
         /// | Exp_System_MathF |  3.369 ns | 0.1301 ns | 0.1866 ns |
         /// |  Exp_System_Math | 14.355 ns | 0.2615 ns | 0.2183 ns |
-        /// |     Exp_FastMath |  4.104 ns | 0.1024 ns | 0.0957 ns |
+        /// |     Exp_FxMath |  4.104 ns | 0.1024 ns | 0.0957 ns |
         /// </remarks>
         public static Vector256<float> Exp(Vector256<float> x)
         {

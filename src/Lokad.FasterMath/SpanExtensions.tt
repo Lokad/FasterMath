@@ -6,7 +6,7 @@ using System.Runtime.Intrinsics;
 
 namespace Lokad.Numerics
 {
-	public partial class FastMath
+	public partial class FxMath
     {
 <#
     var functions = new [] { "Digamma", "Exp", "Log", "LogGamma" };

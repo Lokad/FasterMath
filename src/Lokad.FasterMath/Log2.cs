@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Intrinsics.X86;
 
-
 namespace Lokad.Numerics
 {
-    public partial class FastMath
+    public partial class FxMath
     {
         public static uint Log2(uint value)
         {
@@ -19,7 +18,5 @@ namespace Lokad.Numerics
 
             return 64 - 1 - Lzcnt.X64.LeadingZeroCount(value);
         }
-
-
     }
 }

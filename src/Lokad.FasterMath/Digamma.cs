@@ -4,7 +4,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace Lokad.Numerics
 {
-    public partial class FastMath
+    public partial class FxMath
     {
         // Source:
         // https://github.com/mathnet/mathnet-numerics/blob/master/src/Numerics/SpecialFunctions/Gamma.cs

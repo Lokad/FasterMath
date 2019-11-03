@@ -11,7 +11,7 @@ namespace Lokad.Numerics.Tests
             for(var i = 1.0; i < uint.MaxValue; i *= 1.3)
             {
                 var n = (uint)i;
-                Assert.Equal((uint)Math.Log(n, 2.0), FastMath.Log2(n));
+                Assert.Equal((uint)Math.Log(n, 2.0), FxMath.Log2(n));
             }
         }
 
@@ -21,7 +21,7 @@ namespace Lokad.Numerics.Tests
             for (var i = 1.0; i < uint.MaxValue; i *= 1.3)
             {
                 var n = (ulong)i;
-                Assert.Equal((ulong)Math.Log(n, 2.0), FastMath.Log2(n));
+                Assert.Equal((ulong)Math.Log(n, 2.0), FxMath.Log2(n));
             }
         }
 

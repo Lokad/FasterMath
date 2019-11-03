@@ -13,7 +13,7 @@ namespace Lokad.Numerics.Tests
         {
             for (float i = -1; i < 85; i += 0.1f)
             {
-                var r = FastMath.Log(i);
+                var r = FxMath.Log(i);
                 Assert.True(MathF.Log(i).AbsError(r) <= 1e-4f);
             }
         }
@@ -23,8 +23,8 @@ namespace Lokad.Numerics.Tests
         {
             for (float i = -1; i < 85; i += 0.1f)
             {
-                var r = FastMath.Log(Vector256.Create((float)i));
-                var expected = FastMath.Log((float)i);
+                var r = FxMath.Log(Vector256.Create((float)i));
+                var expected = FxMath.Log((float)i);
 
                 for (var k = 0; k < 8; k++)
                 {
@@ -39,13 +39,13 @@ namespace Lokad.Numerics.Tests
             var pairs = new List<(float, float)>();
             for (float i = -1; i < 85; i += 0.1f)
             {
-                pairs.Add((i, FastMath.Log(i)));
+                pairs.Add((i, FxMath.Log(i)));
             }
 
             var inputs = pairs.Select(tu => tu.Item1).ToArray();
             var results = new float[pairs.Count];
 
-            FastMath.Log(inputs, results);
+            FxMath.Log(inputs, results);
 
             for(var i = 0; i < inputs.Length; i++)
             {

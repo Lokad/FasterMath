@@ -5,7 +5,7 @@ using System.Runtime.Intrinsics.X86;
 
 namespace Lokad.Numerics
 {
-    public partial class FastMath
+    public partial class FxMath
     {
         private static readonly double Ln2Pi_2 = Math.Log(2.0 * Math.PI) / 2.0;
 

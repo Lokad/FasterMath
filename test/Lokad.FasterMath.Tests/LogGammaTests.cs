@@ -19,7 +19,7 @@ namespace Lokad.Numerics.Tests
 
             foreach (var (val, expected) in results)
             {
-                var r = FastMath.LogGamma(val);
+                var r = FxMath.LogGamma(val);
                 Assert.True(expected.RelError(r) < 1e-4f);
             }
         }
@@ -30,7 +30,7 @@ namespace Lokad.Numerics.Tests
             for (var i = 0.001; i < 10000d; i *= 1.2)
             {
                 var expected = (float)AltMath.LogGamma(i);
-                var r = FastMath.LogGamma((float)i);
+                var r = FxMath.LogGamma((float)i);
                 Assert.True(expected.RelError(r) < 1e-3f);
             }
         }
@@ -40,8 +40,8 @@ namespace Lokad.Numerics.Tests
         {
             for (var i = 0.001; i < 10000d; i *= 1.2)
             {
-                var r = FastMath.LogGamma(Vector256.Create((float)i));
-                var expected = FastMath.LogGamma((float)i);
+                var r = FxMath.LogGamma(Vector256.Create((float)i));
+                var expected = FxMath.LogGamma((float)i);
 
                 for (var k = 0; k < 8; k++)
                 {
