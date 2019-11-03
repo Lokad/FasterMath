@@ -1,14 +1,14 @@
 # FasterMath by Lokad
 
-Author: Joannes Vermorel (Lokad, j.vermorel@lokad.com)
+> Author: Joannes Vermorel (Lokad, j.vermorel@lokad.com)
 
-This library collects a short series of faster (but approximate)
-mathematical functions leveraging hardware intrinsics in .NET.
+This library collects a short series of faster (but approximate) mathematical 
+functions leveraging hardware intrinsics in .NET. The library maintains a 
+relative precision of 1e-3 for the accelerated functions. 
 
-The overall goal is to maintain a relative precision of the order
-of 1e-3 for all the accelerated functions. This threshold loosely
-matches most precision requirements from a "machine learning"
-perspective.
+The library has _no dependency_ and does not rely on memoization techniques.
+The goal is to make the most of the super-scalar capabilities of modern CPUs,
+without burdening the cache or the garbage collector.
 
 ## Requirements
 
@@ -17,35 +17,29 @@ perspective.
 
 ## Performance results
 
-Legends:
+_The `S8` suffix indicates a SIMD implementation with `Vector256<float>`._
 
-* `AltMath` refers to reference implementations (typically highly accurate)
-* The `F8` suffix indicates a SIMD implementation with `Vector256<float>`.
 
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+|               Method |       Mean |     Error |    StdDev |
+|--------------------- |-----------:|----------:|----------:|
+|     Digamma_FastMath |  8.1156 ns | 0.1911 ns | 0.2679 ns |
+|  Digamma_FastMath_S8 | 18.4599 ns | 0.3741 ns | 0.3674 ns |
+|            Exp_MathF |  3.4134 ns | 0.0962 ns | 0.2210 ns |
+|             Exp_Math | 14.5137 ns | 0.2499 ns | 0.2338 ns |
+|         Exp_FastMath |  2.0275 ns | 0.0706 ns | 0.0918 ns |
+|      Exp_FastMath_S8 |  4.5711 ns | 0.1207 ns | 0.2297 ns |
+|            Log_MathF |  3.9548 ns | 0.1100 ns | 0.2528 ns |
+|             Log_Math | 11.2905 ns | 0.1388 ns | 0.1159 ns |
+|         Log_FastMath |  2.7824 ns | 0.0856 ns | 0.1521 ns |
+|      Log_FastMath_S8 |  6.4883 ns | 0.1236 ns | 0.1563 ns |
+|           Log2_MathF | 13.0202 ns | 0.2853 ns | 0.3172 ns |
+|            Log2_Math | 17.1575 ns | 0.3730 ns | 0.7187 ns |
+|        Log2_FastMath |  0.0444 ns | 0.0252 ns | 0.0447 ns |
+|    LogGamma_FastMath | 15.8183 ns | 0.3346 ns | 0.3436 ns |
+| LogGamma_FastMath_S8 | 28.8896 ns | 0.6744 ns | 1.0891 ns |
+
+```BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
 Intel Core i9-8950HK CPU 2.90GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
 .NET Core SDK=3.0.100
   [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-
-
-|                  Method |       Mean |     Error |    StdDev |     Median |
-|------------------------ |-----------:|----------:|----------:|-----------:|
-|        Digamma_FastMath |  7.9170 ns | 0.1776 ns | 0.1744 ns |  7.9893 ns |
-|     Digamma_FastMath_F8 | 17.7764 ns | 0.3655 ns | 0.3419 ns | 17.7850 ns |
-|         Digamma_AltMath | 21.7903 ns | 0.2535 ns | 0.2247 ns | 21.7914 ns |
-|        Exp_System_MathF |  3.1244 ns | 0.0755 ns | 0.0630 ns |  3.1207 ns |
-|         Exp_System_Math | 14.2307 ns | 0.0843 ns | 0.0747 ns | 14.2200 ns |
-|            Exp_FastMath |  1.9704 ns | 0.0671 ns | 0.1260 ns |  1.9491 ns |
-|         Exp_FastMath_F8 |  3.7382 ns | 0.0970 ns | 0.0908 ns |  3.7398 ns |
-|        Log_System_MathF |  3.7687 ns | 0.1423 ns | 0.1397 ns |  3.7460 ns |
-|         Log_System_Math | 11.2308 ns | 0.2265 ns | 0.2119 ns | 11.1222 ns |
-|            Log_FastMath |  2.7621 ns | 0.0836 ns | 0.1171 ns |  2.7509 ns |
-|         Log_FastMath_F8 |  6.3745 ns | 0.1000 ns | 0.0936 ns |  6.3661 ns |
-|       Log2_System_MathF | 12.6858 ns | 0.2752 ns | 0.4820 ns | 12.6605 ns |
-|        Log2_System_Math | 16.6412 ns | 0.2213 ns | 0.1961 ns | 16.6913 ns |
-|      Log2_FastMath_Uint |  0.0104 ns | 0.0161 ns | 0.0215 ns |  0.0000 ns |
-| Log2_AltMath_WithLookup |  1.8607 ns | 0.0523 ns | 0.0437 ns |  1.8616 ns |
-|       LogGamma_FastMath | 15.2935 ns | 0.0794 ns | 0.0620 ns | 15.2884 ns |
-|    LogGamma_FastMath_F8 | 28.6478 ns | 0.4844 ns | 0.4531 ns | 28.4230 ns |
-|        LogGamma_AltMath | 36.2495 ns | 0.7333 ns | 0.7846 ns | 36.0599 ns |
+  DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT```
