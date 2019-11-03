@@ -1,0 +1,32 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
+
+namespace Lokad.Numerics
+{
+	public partial class FastMath
+    {
+<#
+    var functions = new [] { "Digamma", "Exp", "Log", "LogGamma" };
+    foreach(var f in functions)
+	{
+#>
+		public static void <#= f #>(ReadOnlySpan<float> values, Span<float> results)
+        {
+            var v = MemoryMarshal.Cast<float, Vector256<float>>(values);
+            var r = MemoryMarshal.Cast<float, Vector256<float>>(results);
+
+            for (var i = 0; i < r.Length; i++)
+                r[i] = <#= f #>(v[i]);
+
+            for (var i = r.Length * Vector256<float>.Count; i < results.Length; i++)
+                results[i] = <#= f #>(values[i]);
+        }
+
+<#
+    }
+#>
+	}
+}
