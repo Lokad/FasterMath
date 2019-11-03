@@ -10,7 +10,7 @@ The library has _no dependency_ and does _not_ rely on memoization techniques.
 The goal is to make the most of the superscalar capabilities of modern CPUs,
 without burdening the cache or the garbage collector.
 
-_This library is licensed under the MIT licence._
+_This library is licensed under the MIT license._
 
 ## Requirements
 
