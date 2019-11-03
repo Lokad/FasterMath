@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 
-namespace Lokad.FastMath
+namespace Lokad.Numerics
 {
     public partial class FastMath
     {

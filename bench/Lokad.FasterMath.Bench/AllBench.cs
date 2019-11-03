@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Intrinsics;
 
-namespace Lokad.FastMath.Bench
+namespace Lokad.Numerics.Bench
 {
     [RPlotExporter]
     public class AllBench

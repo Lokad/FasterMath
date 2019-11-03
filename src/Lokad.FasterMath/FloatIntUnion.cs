@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Lokad.FastMath
+namespace Lokad.Numerics
 {
     /// <summary> Helper intended for quick-cast float into int (and vice-versa). </summary>
     [StructLayout(LayoutKind.Explicit, Size = 4)]

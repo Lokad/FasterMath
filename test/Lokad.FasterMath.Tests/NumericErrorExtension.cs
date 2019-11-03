@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lokad.FastMath.Tests
+namespace Lokad.Numerics.Tests
 {
     public static class NumericErrorExtension
     {

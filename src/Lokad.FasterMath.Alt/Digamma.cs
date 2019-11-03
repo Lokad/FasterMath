@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lokad.FastMath.Alt
+namespace Lokad.Numerics
 {
     public partial class AltMath
     {

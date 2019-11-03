@@ -2,9 +2,8 @@
 using System.Runtime.Intrinsics;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using Lokad.FastMath.Alt;
 
-namespace Lokad.FastMath.Bench
+namespace Lokad.Numerics.Bench
 {
     public class Program
     {

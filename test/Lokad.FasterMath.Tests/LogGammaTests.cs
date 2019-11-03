@@ -1,8 +1,7 @@
-﻿using Lokad.FastMath.Alt;
-using System.Runtime.Intrinsics;
+﻿using System.Runtime.Intrinsics;
 using Xunit;
 
-namespace Lokad.FastMath.Tests
+namespace Lokad.Numerics.Tests
 {
     public class LogGammaTests
     {

@@ -1,8 +1,7 @@
-﻿using Lokad.FastMath.Alt;
-using System;
+﻿using System;
 using Xunit;
 
-namespace Lokad.FastMath.Tests
+namespace Lokad.Numerics.Tests
 {
     public class Log2Tests
     {

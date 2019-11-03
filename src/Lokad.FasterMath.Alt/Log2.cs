@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Lokad.FastMath.Alt
+namespace Lokad.Numerics
 {
     public partial class AltMath
     {
