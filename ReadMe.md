@@ -17,7 +17,13 @@ _This library is licensed under the MIT licence._
 * .NET Core 3.0+
 * Modern CPU with AVX2
 
-## Usage
+## Getting started
+
+To install with NuGet:
+
+    Install-Package Lokad.FasterMath
+
+Usage:
 
 ```csharp
 using Lokad.Numerics;
