@@ -6,14 +6,24 @@ This library collects a short series of faster (but approximate) mathematical
 functions leveraging hardware intrinsics in .NET. The library maintains a 
 relative precision of 1e-3 for the accelerated functions. 
 
-The library has _no dependency_ and does not rely on memoization techniques.
-The goal is to make the most of the super-scalar capabilities of modern CPUs,
+The library has _no dependency_ and does _not_ rely on memoization techniques.
+The goal is to make the most of the superscalar capabilities of modern CPUs,
 without burdening the cache or the garbage collector.
 
 ## Requirements
 
 * .NET Core 3.0+
 * Modern CPU with AVX2
+
+## Usage
+
+    using Lokad.Numerics;
+	
+	var x = FastMath.Log(123f); // scalar
+
+	ReadOnlySpan<float> myInputs = .. ; 
+	Span<float> myResults = .. ;
+	FastMath.Log(myInputs, myResults); // SIMD-accelerated
 
 ## Performance results
 
@@ -43,3 +53,4 @@ Intel Core i9-8950HK CPU 2.90GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical
 .NET Core SDK=3.0.100
   [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
   DefaultJob : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT```
+
