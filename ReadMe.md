@@ -2,13 +2,15 @@
 
 > Author: Joannes Vermorel (Lokad, j.vermorel@lokad.com)
 
-This library collects a short series of faster (but approximate) mathematical 
+This library collects a short series of faster, but approximate, mathematical 
 functions leveraging hardware intrinsics in .NET. The library maintains a 
 relative precision of 1e-3 for the accelerated functions. 
 
 The library has _no dependency_ and does _not_ rely on memoization techniques.
 The goal is to make the most of the superscalar capabilities of modern CPUs,
 without burdening the cache or the garbage collector.
+
+_This library is licensed under the MIT licence._
 
 ## Requirements
 
@@ -17,12 +19,14 @@ without burdening the cache or the garbage collector.
 
 ## Usage
 
-    using Lokad.Numerics;
+```csharp
+using Lokad.Numerics;
 	
-	var x = FxMath.Log(123f); // scalar
-	ReadOnlySpan<float> myInputs = .. ; 
-	Span<float> myResults = .. ;
-	FxMath.Log(myInputs, myResults); // SIMD-accelerated
+var x = FxMath.Log(123f); // scalar
+ReadOnlySpan<float> myInputs = .. ; 
+Span<float> myResults = .. ;
+FxMath.Log(myInputs, myResults); // SIMD-accelerated
+```
 
 ## Performance results
 

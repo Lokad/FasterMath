@@ -4,6 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>Lokad.Numerics.Bench</RootNamespace>
+
+    <Company>Lokad</Company>
+    <Copyright>Copyright © Lokad 2019</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
