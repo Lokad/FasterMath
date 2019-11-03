@@ -1,6 +1,6 @@
-﻿# Lokad.FastMath
+﻿# Lokad.FasterMath
 
-High-performance low-precision mathematical operations in .NET 
+High-performance low-precision mathematical operations in .NET
 leveraging hardware intrinsics.
 
 ## Design considerations

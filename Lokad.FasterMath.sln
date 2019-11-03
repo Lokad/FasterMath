@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.FastMath", "src\Lokad.FastMath\Lokad.FastMath.csproj", "{2F2FD74A-07F3-42EF-9B2F-A92715C8347B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.FasterMath", "src\Lokad.FasterMath\Lokad.FasterMath.csproj", "{2F2FD74A-07F3-42EF-9B2F-A92715C8347B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.FastMath.Tests", "test\Lokad.FastMath.Tests\Lokad.FastMath.Tests.csproj", "{22ADF60A-2CD5-4681-B2C3-F63A8DEC1FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.FasterMath.Tests", "test\Lokad.FasterMath.Tests\Lokad.FasterMath.Tests.csproj", "{22ADF60A-2CD5-4681-B2C3-F63A8DEC1FB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.FastMath.Bench", "bench\Lokad.FastMath.Bench\Lokad.FastMath.Bench.csproj", "{D61C9F40-647F-4849-ABD7-7C5125BEA89E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lokad.FasterMath.Bench", "bench\Lokad.FasterMath.Bench\Lokad.FasterMath.Bench.csproj", "{D61C9F40-647F-4849-ABD7-7C5125BEA89E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.FastMath.Alt", "src\Lokad.FastMath.Alt\Lokad.FastMath.Alt.csproj", "{F0EACB1A-638F-4E62-9F2F-070C4FF720D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lokad.FasterMath.Alt", "src\Lokad.FasterMath.Alt\Lokad.FasterMath.Alt.csproj", "{F0EACB1A-638F-4E62-9F2F-070C4FF720D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BC85A4E5-CA98-4134-B332-65B4778746E9}"
 	ProjectSection(SolutionItems) = preProject

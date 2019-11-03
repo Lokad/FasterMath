@@ -1,4 +1,4 @@
-# Lokad.FastMath
+# FasterMath by Lokad
 
 Author: Joannes Vermorel (Lokad, j.vermorel@lokad.com)
 

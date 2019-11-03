@@ -1,4 +1,4 @@
-﻿# Lokad.FastMath.Alt
+﻿# Lokad.FasterMath.Alt
 
 Alternative implementations, typically slower than hardware-accelerated ones.
 This library is introduced as a container for numerical recipees that are of
